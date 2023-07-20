@@ -100,3 +100,11 @@ VALUES
 (3, 1),
 (3, 2),
 (3, 3)
+
+USE `food_directory`;
+
+CREATE TABLE `food_items` (`id` int(11) NOT NULL,`food_name` varchar(256),`food_price` int(50),
+	primary key(`id`));
+
+
+INSERT INTO `food_directory`.food_items (id,food_name,food_price) values (100,"Pizza",150),(101,"Burger",199),(102,"Noodles",90),(103,"Manchuriyan",70),(104,"Biryani",50),(105,"Vada Pav",20);

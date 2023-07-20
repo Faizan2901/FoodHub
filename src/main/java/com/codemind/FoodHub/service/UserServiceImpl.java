@@ -6,11 +6,13 @@ import com.codemind.FoodHub.entity.Role;
 import com.codemind.FoodHub.entity.User;
 import com.codemind.FoodHub.user.WebUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService{
     public User findByUserName(String userName) {
         return userDAO.findByUserName(userName);
     }
+
 
     @Override
     public void save(WebUser webUser) {
@@ -53,7 +56,6 @@ public class UserServiceImpl implements UserService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user=userDAO.findByUserName(username);
-
         if(user==null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
