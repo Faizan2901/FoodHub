@@ -13,7 +13,7 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Welcome to Food Hub, <span sec:authentication ="principal.username"></span></a>
+    <a class="navbar-brand" href="#">Welcome to Food Hub, <span sec:authentication ="principal.username"> </span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,7 +41,10 @@
         <h1 class="display-4">Welcome to Food Hub</h1>
         <p class="lead">Explore our delicious menu and satisfy your taste buds!</p>
         <a class="btn btn-primary btn-lg" th:href="@{/food/foodItems}" role="button">View Menu</a>
-<!--        <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder/(name=${user.username})}" role="button">My Orders</a>-->
+<!--        <form th:action="@{/food/myOrder}" method="post">-->
+<!--            <input class="btn btn-primary btn-lg" type="submit" role="button" value="My Orders">-->
+<!--        </form>-->
+        <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder}" role="button">My Orders</a>
     </div>
 </div>
 

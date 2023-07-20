@@ -1,10 +1,9 @@
 package com.codemind.FoodHub.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -21,5 +20,7 @@ public class FoodItems {
     @Column(name = "food_price")
     private int foodPrice;
 
+    @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)
+    List<User> userList;
 
 }
