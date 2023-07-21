@@ -27,16 +27,10 @@
         <tr th:each="items : ${foodItems}">
             <td th:text="${items.foodName}" />
             <td th:text="${items.foodPrice}" />
-            <td>
-                <a th:href="@{/food/addThisFood(foodId=${items.id})}" class="btn btn-info btn-sm">
-                    Add
+            <td style="text-align: center; ">
+                <a th:href="@{/food/addThisFood(foodId=${items.id})}" class="btn btn-info btn-lg">
+                    Add Item
                 </a>
-
-                <!--                <a th:href="@{/employees/delete}"-->
-<!--                   class="btn btn-danger btn-sm"-->
-<!--                   onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">-->
-<!--                    Delete-->
-<!--                </a>-->
             </td>
         </tr>
         </tbody>
