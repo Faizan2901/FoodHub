@@ -108,3 +108,10 @@ CREATE TABLE `food_items` (`id` int(11) NOT NULL,`food_name` varchar(256),`food_
 
 
 INSERT INTO `food_directory`.food_items (id,food_name,food_price) values (100,"Pizza",150),(101,"Burger",199),(102,"Noodles",90),(103,"Manchuriyan",70),(104,"Biryani",50),(105,"Vada Pav",20);
+
+--ALTER TABLE `food_directory`.`food_items_user_list`
+--ADD COLUMN `quantity` INT NOT NULL AFTER `user_list_id`;
+
+
+ALTER TABLE `food_directory`.`food_items`
+RENAME TO  `food_directory`.`fooditems` ;

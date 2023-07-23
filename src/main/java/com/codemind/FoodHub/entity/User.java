@@ -3,7 +3,9 @@ package com.codemind.FoodHub.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -32,6 +34,23 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)
+            @JoinTable(name = "food_items_user_list",
+            joinColumns = @JoinColumn(name = "user_list_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_items_id"))
+    List<FoodItems> foodItems;
+
+
+    public List<FoodItems> add(FoodItems tempFoodItem){
+
+        if(foodItems == null){
+            foodItems = new ArrayList<>();
+        }
+
+        foodItems.add(tempFoodItem);
+
+        return foodItems;
+    }
 
     /*OneToMany: LAZY
     ManyToOne: EAGER

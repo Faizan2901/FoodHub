@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "food_items")
+@Table(name = "fooditems")
 public class FoodItems {
 
     @Id
@@ -20,7 +20,5 @@ public class FoodItems {
     @Column(name = "food_price")
     private int foodPrice;
 
-    @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)
-    List<User> userList;
 
 }
