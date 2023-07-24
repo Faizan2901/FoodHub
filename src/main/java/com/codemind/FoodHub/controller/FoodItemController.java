@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 @Controller
@@ -50,7 +51,7 @@ public class FoodItemController {
     }
 
     @PostMapping("/addThisFood")
-    public String addFood(@RequestParam("foodId") String foodId,@RequestParam("quantity") String quantity){
+    public String addFood(@RequestParam("foodId") String foodId){
 
         User user= userDAO.findByUserName(authController.getAuthenticateUserName());
 
@@ -64,6 +65,39 @@ public class FoodItemController {
 
 
 
-        return "default/food-items";
+        return "redirect:/";
+    }
+
+    @PostMapping("/removeThisItem")
+    public String removeUserItem(@RequestParam("id") String id){
+
+        User user= userDAO.findByUserName(authController.getAuthenticateUserName());
+
+        int fooId=Integer.parseInt(id);
+
+        List<FoodItems> foodItemsList=user.getFoodItems();
+
+        boolean isPresent=false;
+
+        FoodItems foodItems=null;
+
+        for(FoodItems items:foodItemsList){
+            if(items.getId()==fooId){
+                isPresent=true;
+                foodItems=items;
+                break;
+
+            }
+        }
+        if(isPresent){
+            foodItemsList.remove(foodItems);
+        }
+
+        user.setFoodItems(foodItemsList);
+
+        userDAO.save(user);
+
+        return "redirect:/";
+
     }
 }
