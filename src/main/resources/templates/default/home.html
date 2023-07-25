@@ -63,6 +63,10 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="'Item: ' +${items.foodName}"></h5>
                     <p class="card-text" th:text="'Price: ' +${items.foodPrice}"></p>
+                    <div th:each="cItem :${countItem}">
+                        <p class="card-text" th:if="${items.id} == ${cItem.key}"><span th:text="'Quantity : ' +${cItem.value}"></span></p>
+                    </div>
+                    <br>
                     <form th:action="@{/food/removeThisItem}" method="post">
                         <input th:name="id" type="hidden" th:value="${items.id}">
                         <input type="submit" value="Remove" class="btn btn-danger"/>

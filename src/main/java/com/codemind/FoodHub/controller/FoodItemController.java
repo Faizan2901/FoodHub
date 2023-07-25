@@ -9,12 +9,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/food")
@@ -75,24 +75,11 @@ public class FoodItemController {
 
         int fooId=Integer.parseInt(id);
 
+        FoodItems deleteItem=foodItemsDAO.findByFoodId(fooId);
+
         List<FoodItems> foodItemsList=user.getFoodItems();
 
-        boolean isPresent=false;
-
-        FoodItems foodItems=null;
-
-        for(FoodItems items:foodItemsList){
-            if(items.getId()==fooId){
-                isPresent=true;
-                foodItems=items;
-                break;
-
-            }
-        }
-        if(isPresent){
-            foodItemsList.remove(foodItems);
-        }
-
+        foodItemsList.remove(deleteItem);
         user.setFoodItems(foodItemsList);
 
         userDAO.save(user);
