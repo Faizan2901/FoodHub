@@ -34,6 +34,7 @@ public class DefaultController {
 
         Map<Integer,Integer> countItems=new HashMap<>();
 
+
         for(FoodItems items:foodItemsList){
             System.out.println(items.getFoodName()+" "+items.getFoodPrice());
             countItems.put(items.getId(), foodItemsDAO.countOfSameItemsofCustomer(user.getId(), items.getId()));
