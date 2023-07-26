@@ -116,13 +116,12 @@ public class FoodItemController {
     }
 
     @PostMapping("/removeThisItem")
-    public String removeUserItem(@RequestParam("id") String id){
+    public String removeUserItem(@RequestParam("foodName") String foodName){
 
         User user= userDAO.findByUserName(authController.getAuthenticateUserName());
 
-        int fooId=Integer.parseInt(id);
 
-        FoodItems deleteItem=foodItemsDAO.findByFoodId(fooId);
+        FoodItems deleteItem=foodItemsDAO.findByFoodName(foodName);
 
         List<FoodItems> foodItemsList=user.getFoodItems();
 

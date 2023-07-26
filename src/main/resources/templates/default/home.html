@@ -54,20 +54,22 @@
         </h5>
     </div>
     <div class="row" th:if="${isAdded}">
-        <div class="col-md-4 mb-4" th:each="items :${foodItems}">
+        <div class="col-md-4 mb-4">
             <div class="card">
                 <img th:src="@{/food-images/food.jpg}" class="card-img-top" alt="Featured Item 1">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="'Item: ' +${items.foodName}"></h5>
-                    <p class="card-text" th:text="'Price: ' +${items.foodPrice}"></p>
-                    <div th:each="cItem :${countItem}">
-                        <p class="card-text" th:if="${items.id} == ${cItem.key}"><span th:text="'Quantity : ' +${cItem.value}"></span></p>
+                <div class="card-body" th:each="bill : ${billMap}">
+                    <div th:each="final : ${finalMap}">
+                        <div th:if="${bill.key} == ${final.key}">
+                            <h5 class="card-title" th:text="'Item: ' +${final.key}"></h5>
+                            <p class="card-text" th:text="'Price: ' +${bill.value}"></p>
+                            <p class="card-text" th:text="'Quantity : ' +${final.value}"></p>
+                            <br>
+                            <form th:action="@{/food/removeThisItem}" method="post">
+                                <input th:name="foodName" type="hidden" th:value="${final.key}">
+                                <input type="submit" value="Remove" class="btn btn-danger"/>
+                            </form>
+                        </div>
                     </div>
-                    <br>
-                    <form th:action="@{/food/removeThisItem}" method="post">
-                        <input th:name="id" type="hidden" th:value="${items.id}">
-                        <input type="submit" value="Remove" class="btn btn-danger"/>
-                    </form>
                 </div>
             </div>
         </div>

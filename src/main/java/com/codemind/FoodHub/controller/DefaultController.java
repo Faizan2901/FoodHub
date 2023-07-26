@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,12 +33,33 @@ public class DefaultController {
 
         List<FoodItems> foodItemsList=user.getFoodItems();
 
-        Map<Integer,Integer> countItems=new HashMap<>();
+        Map<String,Integer> billMap=new HashMap<>();
 
 
-        for(FoodItems items:foodItemsList){
-            System.out.println(items.getFoodName()+" "+items.getFoodPrice());
-            countItems.put(items.getId(), foodItemsDAO.countOfSameItemsofCustomer(user.getId(), items.getId()));
+        for(FoodItems foodItems:foodItemsList){
+            String foodName=foodItems.getFoodName();
+            int foodPrice=foodItems.getFoodPrice();
+
+            if (billMap.containsKey(foodName))
+            {
+                int mapValue = billMap.get(foodName);
+                billMap.put(foodName, mapValue + foodPrice);
+            } else
+            {
+                billMap.put(foodName, foodPrice);
+            }
+        }
+
+        Iterator<String> it = billMap.keySet().iterator();
+
+        Map<String,Integer> finalMap=new HashMap<>();
+
+        while(it.hasNext()){
+            String foodName=it.next();
+            FoodItems items=foodItemsDAO.findByFoodName(foodName);
+            int foodPrice=items.getFoodPrice();
+            int quantity=billMap.get(foodName)/foodPrice;
+            finalMap.put(foodName,quantity);
         }
 
         if(foodItemsList.size()==0){
@@ -45,10 +67,13 @@ public class DefaultController {
 
         }else{
             model.addAttribute("isAdded",true);
-            model.addAttribute("foodItems",foodItemsList);
-            model.addAttribute("countItem",countItems);
+            model.addAttribute("billMap",billMap);
+            model.addAttribute("finalMap",finalMap);
             model.addAttribute("userDetails",user.getFirstName()+" "+user.getLastName());
         }
+
+        System.out.println(billMap);
+        System.out.println(finalMap);
 
         return "default/home";
     }
