@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/food")
@@ -40,13 +43,57 @@ public class FoodItemController {
     }
 
     @GetMapping("/myOrder")
-    public String showMyOrders(){
+    public String showMyOrders(Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authController.getAuthenticateUserName();
 
-        System.out.println("Username : "+authentication.getName());
+        System.out.println("Username : "+username);
 
-        return "default/food-items";
+        User user=userDAO.findByUserName(username);
+
+        Map<String,Integer> billMap=new HashMap<>();
+
+        List<FoodItems> foodItemsList=user.getFoodItems();
+
+        int totalBillPrice=0;
+
+        for(FoodItems foodItems:foodItemsList){
+            String foodName=foodItems.getFoodName();
+            int foodPrice=foodItems.getFoodPrice();
+
+                if (billMap.containsKey(foodName))
+                {
+                    int mapValue = billMap.get(foodName);
+                    billMap.put(foodName, mapValue + foodPrice);
+                } else
+                {
+                    billMap.put(foodName, foodPrice);
+                }
+            }
+
+        System.out.println(billMap);
+
+        Iterator<String> it = billMap.keySet().iterator();
+
+        Map<String,Integer> finalMap=new HashMap<>();
+
+        while(it.hasNext()){
+            String foodName=it.next();
+            FoodItems items=foodItemsDAO.findByFoodName(foodName);
+            int foodPrice=items.getFoodPrice();
+            int quantity=billMap.get(foodName)/foodPrice;
+            totalBillPrice=totalBillPrice+(quantity*foodPrice);
+            finalMap.put(foodName,quantity);
+        }
+
+        System.out.println(finalMap);
+        System.out.println("Total Bill is : "+totalBillPrice);
+
+        model.addAttribute("billMap",billMap);
+        model.addAttribute("finalMap",finalMap);
+        model.addAttribute("totalBillPrice",totalBillPrice);
+
+        return "default/bill-page";
 
     }
 

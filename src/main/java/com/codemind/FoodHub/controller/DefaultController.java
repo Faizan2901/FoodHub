@@ -47,6 +47,7 @@ public class DefaultController {
             model.addAttribute("isAdded",true);
             model.addAttribute("foodItems",foodItemsList);
             model.addAttribute("countItem",countItems);
+            model.addAttribute("userDetails",user.getFirstName()+" "+user.getLastName());
         }
 
         return "default/home";
