@@ -1,0 +1,10 @@
+body {
+    /* Replace 'path/to/your/image.jpg' with the actual path to your image file */
+    background-image: url('static/food-images/background.jpg');
+    /* Set background properties to cover the entire body */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* Set the background color in case the image is unavailable or while it's loading */
+    background-color: #f0f0f0;
+}
