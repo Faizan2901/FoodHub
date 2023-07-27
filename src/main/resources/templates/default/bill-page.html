@@ -18,6 +18,7 @@
         <thead class="table-dark">
         <tr>
             <th>Food Name</th>
+            <th>Food Price</th>
             <th>Food Quantity</th>
             <th>Your Order Price</th>
         </tr>
@@ -30,6 +31,7 @@
                 <tr>
                     <div th:if="${bill.key} == ${final.key}">
                         <td th:text="${final.key}" />
+                        <td th:text="${bill.value}/${final.value}" />
                         <td th:text="${final.value}" />
                         <td th:text="${bill.value}"/>
                     </div>

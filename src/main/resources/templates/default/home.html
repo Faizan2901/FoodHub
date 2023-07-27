@@ -29,7 +29,12 @@
                 <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="https://faizan2901.github.io/drum-kit/contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input class="nav-link btn btn-danger" type="submit" value="Logout" />
+                </form>
             </li>
         </ul>
     </div>
@@ -41,7 +46,9 @@
         <h1 class="display-4">Welcome to Food Hub</h1>
         <p class="lead">Explore our delicious menu and satisfy your taste buds!</p>
         <a class="btn btn-primary btn-lg" th:href="@{/food/foodItems}" role="button">View Menu</a>
-        <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder}" role="button">My Orders</a>
+        <th:block th:if="${noOrder}">
+            <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder}" role="button">My Orders</a>
+        </th:block>
     </div>
 </div>
 
@@ -50,7 +57,7 @@
     <h2 class="text-center mb-4">Your Ordered Items</h2>
     <div  th:if="${!isAdded}">
         <h5 class="text-center mb-4">
-            You have not order yet!
+            You have not placed any order yet!, please click view menu to place an order
         </h5>
     </div>
     <div class="row" th:if="${isAdded}">

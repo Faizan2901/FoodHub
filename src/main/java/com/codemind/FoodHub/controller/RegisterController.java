@@ -34,6 +34,7 @@ public class RegisterController {
     @GetMapping("/registerPage")
     public String showRegisterPage(Model model){
         model.addAttribute("webUser",new WebUser());
+        System.out.println("Hello");
         return "default/register/register";
     }
 

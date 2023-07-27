@@ -35,6 +35,12 @@ public class DefaultController {
 
         Map<String,Integer> billMap=new HashMap<>();
 
+        boolean noOrder=true;
+
+        if(foodItemsList.isEmpty()){
+            noOrder=false;
+        }
+        model.addAttribute("noOrder",noOrder);
 
         for(FoodItems foodItems:foodItemsList){
             String foodName=foodItems.getFoodName();
