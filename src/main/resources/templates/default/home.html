@@ -41,7 +41,9 @@
         <h1 class="display-4">Welcome to Food Hub</h1>
         <p class="lead">Explore our delicious menu and satisfy your taste buds!</p>
         <a class="btn btn-primary btn-lg" th:href="@{/food/foodItems}" role="button">View Menu</a>
-        <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder}" role="button">My Orders</a>
+        <th:block th:if="${noOrder}">
+            <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder}" role="button">My Orders</a>
+        </th:block>
     </div>
 </div>
 
