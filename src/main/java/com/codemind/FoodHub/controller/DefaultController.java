@@ -75,11 +75,13 @@ public class DefaultController {
             model.addAttribute("isAdded",true);
             model.addAttribute("billMap",billMap);
             model.addAttribute("finalMap",finalMap);
-            model.addAttribute("userDetails",user.getFirstName()+" "+user.getLastName());
         }
 
         System.out.println(billMap);
         System.out.println(finalMap);
+        model.addAttribute("userDetails",user.getFirstName()+" "+user.getLastName());
+
+        System.out.println(user.getFirstName()+" "+user.getLastName());
 
         return "default/home";
     }
