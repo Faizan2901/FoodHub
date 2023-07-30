@@ -67,7 +67,7 @@ public class RegisterController {
 
         httpSession.setAttribute("user",webUser);
 
-        return "default/register/registration-confirmation";
+        return "redirect:/";
 
     }
 
