@@ -4,6 +4,7 @@ import com.codemind.FoodHub.entity.User;
 import com.codemind.FoodHub.service.UserService;
 import com.codemind.FoodHub.user.WebUser;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,7 @@ public class RegisterController {
     }
 
     @PostMapping("/processRegForm")
-    public String processRegistrationForm(@ModelAttribute("webUser") WebUser webUser, BindingResult bindingResult, HttpSession httpSession,Model model){
+    public String processRegistrationForm(@Valid @ModelAttribute("webUser") WebUser webUser, BindingResult bindingResult, HttpSession httpSession, Model model){
 
         String userName= webUser.getUserName();
         logger.info("Processing registration for : "+userName);
