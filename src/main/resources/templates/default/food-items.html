@@ -40,7 +40,7 @@
     <div>
         <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">Go to Home</a>
         <th:block sec:authorize="hasRole('ADMIN')">
-            <a class="btn btn-primary btn-lg" th:href="@{/}" role="button">Add Food Item</a>
+            <a class="btn btn-primary btn-lg" th:href="@{/food/addFood}" role="button">Add Food Item</a>
         </th:block>
     </div>
 </div>
