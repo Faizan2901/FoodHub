@@ -52,7 +52,7 @@ public class AdminController {
     @GetMapping("/updateItem")
     String updateFoodItem(@RequestParam("foodId") String foodId,Model model){
 
-        FoodItems foodItem=foodItemsDAO.findByFoodId(Integer.parseInt(foodId));
+        FoodItems foodItem=foodItemsDAO.findById(Integer.parseInt(foodId));
 
         model.addAttribute("foodItem",foodItem);
 
@@ -63,7 +63,7 @@ public class AdminController {
     @GetMapping("/deleteItem")
     String deleteFoodItem(@RequestParam("foodId") String foodId){
 
-        FoodItems foodItems=foodItemsDAO.findByFoodId(Integer.parseInt(foodId));
+        FoodItems foodItems=foodItemsDAO.findById(Integer.parseInt(foodId));
 
         foodItemsDAO.delete(foodItems);
 

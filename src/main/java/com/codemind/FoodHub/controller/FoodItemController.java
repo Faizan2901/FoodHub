@@ -99,7 +99,7 @@ public class FoodItemController {
 
         int fooId=Integer.parseInt(foodId);
 
-        FoodItems foodItems=foodItemsDAO.findByFoodId(fooId);
+        FoodItems foodItems=foodItemsDAO.findById(fooId);
 
         user.setFoodItems(user.add(foodItems));
 

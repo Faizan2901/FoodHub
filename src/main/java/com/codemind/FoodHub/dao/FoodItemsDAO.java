@@ -7,12 +7,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface FoodItemsDAO extends JpaRepository<FoodItems,Integer> {
 
-    @Query (value="SELECT * FROM food_items  WHERE id=:foodId",nativeQuery = true)
-    FoodItems findByFoodId(@Param("foodId") int foodId);
+    FoodItems findById(int foodId);
 
     FoodItems findByFoodName(String foodName);
 
-    @Query(value = "SELECT * FROM food_items WHERE food_name=:foodName AND food_price=:foodPrice",nativeQuery = true)
-    FoodItems findByFoodNameAndFoodPrice(@Param("foodName") String foodName,@Param("foodPrice") int foodPrice);
+    FoodItems findByFoodNameAndFoodPrice(String foodName, int foodPrice);
 
 }
