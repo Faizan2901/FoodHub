@@ -46,9 +46,14 @@
         <p class="lead">Explore our delicious menu and satisfy your taste buds!</p>
         <a class="btn btn-primary btn-lg" th:href="@{/food/foodItems}" role="button">View Menu</a>
         <th:block th:if="${noOrder}">
+            &nbsp;
             <a class="btn btn-primary btn-lg" th:href="@{/food/myOrder}" role="button">My Orders</a>
         </th:block>
     </div>
+    <br>
+    <th:block sec:authorize="hasRole('ADMIN')">
+        <a class="btn btn-primary btn-lg" th:href="@{/admin/users}" role="button">Users</a>
+    </th:block>
 </div>
 
 <!-- Featured Items Section -->
