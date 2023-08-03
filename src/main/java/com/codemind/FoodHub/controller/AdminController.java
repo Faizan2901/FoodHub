@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -71,5 +73,74 @@ public class AdminController {
 
     }
 
+    @GetMapping("/users")
+    String getUsers(Model model){
+
+        List<User> userList=userDAO.findAll();
+
+        model.addAttribute("users",userList);
+
+        return "default/user-list";
+    }
+
+
+    @GetMapping("/deleteUser")
+    String deleteUser(@RequestParam("userId") String userId){
+
+        Optional<User> user=userDAO.findById(Integer.parseInt(userId));
+
+        if(user.isPresent()){
+            user.get().getRoles().clear();
+            userDAO.deleteById(Integer.parseInt(userId));
+        }
+
+        return "redirect:/admin/users";
+
+    }
+
+    @GetMapping("/checkOrder")
+    String checkUserOrder(@RequestParam("userId") String userId,Model model){
+
+        Optional<User> user=userDAO.findById(Integer.parseInt(userId));
+
+        Map<String,Integer> billMap=new HashMap<>();
+
+        List<FoodItems> foodItemsList=user.get().getFoodItems();
+
+        int totalBillPrice=0;
+
+        for(FoodItems foodItems:foodItemsList){
+            String foodName=foodItems.getFoodName();
+            int foodPrice=foodItems.getFoodPrice();
+
+            if (billMap.containsKey(foodName))
+            {
+                int mapValue = billMap.get(foodName);
+                billMap.put(foodName, mapValue + foodPrice);
+            } else
+            {
+                billMap.put(foodName, foodPrice);
+            }
+        }
+        Iterator<String> it = billMap.keySet().iterator();
+
+        Map<String,Integer> finalMap=new HashMap<>();
+
+        while(it.hasNext()){
+            String foodName=it.next();
+            FoodItems items=foodItemsDAO.findByFoodName(foodName);
+            int foodPrice=items.getFoodPrice();
+            int quantity=billMap.get(foodName)/foodPrice;
+            totalBillPrice=totalBillPrice+(quantity*foodPrice);
+            finalMap.put(foodName,quantity);
+        }
+        model.addAttribute("billMap",billMap);
+        model.addAttribute("finalMap",finalMap);
+        model.addAttribute("totalBillPrice",totalBillPrice);
+
+        return "default/bill-page";
+
+
+    }
 
 }
