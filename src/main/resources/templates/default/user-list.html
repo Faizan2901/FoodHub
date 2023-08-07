@@ -22,6 +22,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Roles</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -32,6 +33,11 @@
             <td th:text="${user.firstName}" />
             <td th:text="${user.lastName}" />
             <td th:text="${user.email}" />
+            <td>
+            <th:block th:each="role : ${user.roles}">
+                <span th:text="${role.name}"></span>
+            </th:block>
+            </td>
             <td style="text-align: center;">
                 <a th:href="@{/admin/checkOrder(userId=${user.id})}"
                    class="btn btn-info btn-sm">
