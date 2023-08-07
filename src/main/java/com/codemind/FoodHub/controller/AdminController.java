@@ -65,8 +65,6 @@ public class AdminController {
     @GetMapping("/deleteItem")
     String deleteFoodItem(@RequestParam("foodId") String foodId){
 
-        //FoodItems foodItems=foodItemsDAO.findById(Integer.parseInt(foodId));
-
         foodItemsDAO.deleteById(Integer.parseInt(foodId));
 
         return "redirect:/food/foodItems";
@@ -142,5 +140,6 @@ public class AdminController {
 
 
     }
+
 
 }
