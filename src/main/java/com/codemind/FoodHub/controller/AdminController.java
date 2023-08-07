@@ -3,6 +3,7 @@ package com.codemind.FoodHub.controller;
 import com.codemind.FoodHub.dao.FoodItemsDAO;
 import com.codemind.FoodHub.dao.UserDAO;
 import com.codemind.FoodHub.entity.FoodItems;
+import com.codemind.FoodHub.entity.Role;
 import com.codemind.FoodHub.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -138,8 +139,19 @@ public class AdminController {
 
         return "default/bill-page";
 
-
     }
 
+    @GetMapping("/changeRole")
+    String changeUserRole(@RequestParam("userId") String userId,Model model){
+
+        Optional<User> user=userDAO.findById(Integer.parseInt(userId));
+
+        List<Role> roleList=user.get().getRoles();
+
+        model.addAttribute("role",roleList);
+
+
+        return "default/role-list";
+    }
 
 }
