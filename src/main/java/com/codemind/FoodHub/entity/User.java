@@ -32,7 +32,7 @@ public class User {
     @JoinTable(name = "users_roles",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private List<Role> roles;
 
     @ManyToMany(fetch =FetchType.EAGER,cascade = CascadeType.ALL)
             @JoinTable(name = "food_items_user_list",
