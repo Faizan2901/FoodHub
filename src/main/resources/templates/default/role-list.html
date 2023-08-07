@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Select Option Example</title>
+</head>
+<body>
+<form action="#" th:action="@{/submit}" th:object="${role}" method="post">
+    <label for="dropdown">Select an option:</label>
+    <select id="dropdown" name="selectedOption" th:field="*{role}">
+        <option th:each="option : ${role}" th:value="${option.name}" th:text="${option.name}"></option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
