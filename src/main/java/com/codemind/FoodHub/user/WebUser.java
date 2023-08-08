@@ -8,14 +8,14 @@ import lombok.Data;
 @Data
 public class WebUser {
 
-    @NotNull(message = " must be in alphabetic and at least 8 character long")
+    @NotNull(message = " must be in alphabetic and at least 5 character long")
     @Size(min = 1,message = "is required")
-    @Pattern(regexp = "[a-zA-Z]{8,}")
+    @Pattern(regexp = "[a-zA-Z]{5,}")
     private String userName;
 
-    @NotNull(message = " should be at least 8 character long and at least one uppercase and lowercase and Special character")
+    @NotNull(message = " should be at least 5 character long and at least one uppercase and lowercase and Special character")
     @Size(min = 1,message = "is required")
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$")
     private String password;
 
     @NotNull(message = " should be in alphabetic format")
