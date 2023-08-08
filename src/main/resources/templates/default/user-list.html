@@ -22,7 +22,6 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Roles</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -33,18 +32,6 @@
             <td th:text="${user.firstName}" />
             <td th:text="${user.lastName}" />
             <td th:text="${user.email}" />
-            <td>
-                <div th:if="${#lists.size(user.roles) > 1}">
-                    <th:block th:each="role : ${user.roles}">
-                        <span th:text="${role.name}+' ,'"></span>
-                    </th:block>
-                </div>
-                <div th:if="${#lists.size(user.roles) == 1}">
-                    <th:block th:each="role : ${user.roles}">
-                        <span th:text="${role.name}"></span>
-                    </th:block>
-                </div>
-            </td>
             <td style="text-align: center;">
                 <a th:href="@{/admin/checkOrder(userId=${user.id})}"
                    class="btn btn-info btn-sm">
