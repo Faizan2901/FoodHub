@@ -41,7 +41,7 @@ public class User {
     List<FoodItems> foodItems;
 
 
-    public List<FoodItems> add(FoodItems tempFoodItem){
+    public List<FoodItems> addFoodItem(FoodItems tempFoodItem){
 
         if(foodItems == null){
             foodItems = new ArrayList<>();
@@ -50,6 +50,17 @@ public class User {
         foodItems.add(tempFoodItem);
 
         return foodItems;
+    }
+
+    public List<Role> addRoles(Role tempRole){
+
+        if(roles == null){
+            roles = new ArrayList<>();
+        }
+
+        roles.add(tempRole);
+
+        return roles;
     }
 
     /*OneToMany: LAZY
