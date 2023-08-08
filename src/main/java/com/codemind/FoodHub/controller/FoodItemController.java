@@ -101,7 +101,7 @@ public class FoodItemController {
 
         FoodItems foodItems=foodItemsDAO.findById(fooId);
 
-        user.setFoodItems(user.add(foodItems));
+        user.setFoodItems(user.addFoodItem(foodItems));
 
         userDAO.save(user);
 
