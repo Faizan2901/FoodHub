@@ -7,7 +7,10 @@
 <form action="#" th:action="@{/submit}" th:object="${role}" method="post">
     <label for="dropdown">Select an option:</label>
     <select id="dropdown" name="selectedOption" th:field="*{role}">
-        <option th:each="option : ${role}" th:value="${option.name}" th:text="${option.name}"></option>
+        <th:block th:each="option : ${role}">
+            <input th:name="roleId" type="hidden" th:value="${option.id}"/>
+            <option  th:value="${option.name}"></option>
+        </th:block>
     </select>
     <button type="submit">Submit</button>
 </form>
