@@ -154,4 +154,21 @@ public class AdminController {
         return "default/role-list";
     }
 
+    @GetMapping("/roles")
+    String reviewRoles(Model model){
+
+        List<User> userList=userDAO.findAll();
+
+        Map<String,List<Role>> userRoleMap=new HashMap<>();
+
+        for(User user: userList){
+            List<Role> roleList=user.getRoles();
+            userRoleMap.put(user.getUserName(),roleList);
+        }
+
+        model.addAttribute("userRoleMap",userRoleMap);
+        model.addAttribute("users",userList);
+
+        return "default/role-list";
+    }
 }
