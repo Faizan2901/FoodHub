@@ -21,5 +21,30 @@ public class FoodItems {
     @Column(name = "food_price")
     private int foodPrice;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public int getFoodPrice() {
+		return foodPrice;
+	}
+
+	public void setFoodPrice(int foodPrice) {
+		this.foodPrice = foodPrice;
+	}
+
+    
 
 }

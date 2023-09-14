@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+        /* Custom CSS styles */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: none;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border-color: #d2d2d2;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #80bdff;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <title>Add Food Item</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Welcome to Food Hub Admin Panel <span th:text="${userDetails}"> </span></h4>
+        </div>
+        <div class="card-body">
+            <h3 class="card-title">Add Delicious Food..</h3>
+            <hr>
+
+            <form action="#" th:action="@{/admin/save}" th:object="${foodItem}" method="post">
+
+                <div th:if="${error}" class="alert alert-danger">
+                    Food Item Already Exists!
+                </div>
+
+                <input type="hidden" th:field="*{id}">
+                <div class="mb-3">
+                    <input class="form-control" placeholder="Food Name" th:field="*{foodName}" type="text">
+                </div>
+                <div class="mb-3">
+                    <input type="text" th:field="*{foodPrice}" class="form-control" placeholder="Food Price">
+                </div>
+
+                <button type="submit" class="btn btn-info">Add Item</button>
+
+            </form>
+
+            <hr>
+
+            <a th:href="@{/food/foodItems}" class="btn btn-primary btn-lg" role="button">Back to Menu</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and other scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-d7lPeFoB1iydTBge/7Ivp6i8fLjkFs/rt+RBR4igPLHC1iu2TUnuF5JLNLf9MDQ4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
